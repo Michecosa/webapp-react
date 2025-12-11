@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Card from "../components/Card";
 const urlMovies = import.meta.env.VITE_ENDPOINT;
 
 export default function Homepage() {
@@ -25,7 +26,7 @@ export default function Homepage() {
           {movies.length > 0 ? (
             <div className="row">
               {movies.map((movie) => (
-                <li key={movie.id}>{movie.title}</li>
+                <Card key={movie.id} movie={movie} />
               ))}
             </div>
           ) : (
