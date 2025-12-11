@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Card({ movie }) {
   return (
     <div className="col-md-3 mb-4">
-      <div className="card shadow-sm h-100">
+      <div className="card shadow-sm bg-dark h-100">
         {movie.image_url ? (
           <img
             src={movie.image_url}
@@ -19,8 +19,12 @@ export default function Card({ movie }) {
           </div>
         )}
 
-        <div className="card-body d-flex flex-column">
-          <Link to={`/movie/${movie.id}`} className="text-decoration-none">
+        <div className="card-body d-flex flex-column text-white-50">
+          <Link
+            to={`/movie/${movie.id}`}
+            className="text-decoration-none"
+            style={{ color: "white" }}
+          >
             <h5 className="card-title fw-bold">{movie.title}</h5>
           </Link>
 

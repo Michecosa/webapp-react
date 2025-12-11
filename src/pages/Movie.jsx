@@ -41,18 +41,18 @@ export default function Movie() {
             </div>
           </div>
 
-          <div className="col-md-7">
+          <div className="col-md-7 text-white">
             <h2 className="fw-bold mb-1">{movie.title}</h2>
 
-            <p className="text-muted mb-1">
+            <p className="text-white-50 mb-1">
               <strong>Genre:</strong> {movie.genre}
             </p>
 
-            <p className="text-muted mb-1">
+            <p className="text-white-50 mb-1">
               <strong>Director:</strong> {movie.director}
             </p>
 
-            <p className="text-muted mb-3">
+            <p className="text-white-50 mb-3">
               <strong>Year:</strong> {movie.release_year}
             </p>
 
