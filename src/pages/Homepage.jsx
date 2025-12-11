@@ -20,7 +20,9 @@ export default function Homepage() {
   return (
     <>
       {loading ? (
-        <div className="spinner-border text-primary" role="status"></div>
+        <div className="container text-center mt-5">
+          <div className="spinner-border text-white" role="status"></div>
+        </div>
       ) : (
         <div className="container mt-4">
           {movies.length > 0 ? (
