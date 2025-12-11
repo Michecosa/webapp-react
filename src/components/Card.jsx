@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Card({ movie }) {
   return (
     <div className="col-md-3 mb-4">
@@ -18,22 +20,24 @@ export default function Card({ movie }) {
         )}
 
         <div className="card-body d-flex flex-column">
-          <h5 className="card-title fw-bold">{movie.title}</h5>
+          <Link to={`/movie/${movie.id}`} className="text-decoration-none">
+            <h5 className="card-title fw-bold">{movie.title}</h5>
+          </Link>
 
           <p className="text-secondary mb-4">
             {movie.abstract ? movie.abstract : "No description available"}
           </p>
 
           <p className="mb-1">
-            <strong>Regista:</strong> {movie.director || "N/A"}
+            <strong>Director:</strong> {movie.director || "N/A"}
           </p>
 
           <p className="mb-1">
-            <strong>Genere:</strong> {movie.genre || "N/A"}
+            <strong>Genre:</strong> {movie.genre || "N/A"}
           </p>
 
           <p className="mb-3">
-            <strong>Anno:</strong> {movie.release_year || "N/A"}
+            <strong>Year:</strong> {movie.release_year || "N/A"}
           </p>
         </div>
       </div>
