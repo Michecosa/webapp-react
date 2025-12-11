@@ -3,6 +3,7 @@ import DefaultLayout from "./layouts/DefaultLayout";
 import Homepage from "./pages/Homepage";
 import Movie from "./pages/Movie";
 import NotFound from "./pages/NotFound";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route element={<DefaultLayout />}>
           <Route index element={<Homepage />} />
           <Route path="/movie/:id" element={<Movie />} />
+          <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/notfound" element={<NotFound />} />
         </Route>
       </Routes>
