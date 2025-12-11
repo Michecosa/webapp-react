@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Card from "../components/Card";
-const urlMovies = import.meta.env.VITE_ENDPOINT;
+import { urlMovies } from "../data/api";
 
 export default function Homepage() {
   const [movies, setMovies] = useState([]);

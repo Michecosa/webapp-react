@@ -1,8 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
-const urlMovies = import.meta.env.VITE_ENDPOINT;
+import { urlMovies } from "../data/api";
 
 export default function Movie() {
   const { id } = useParams();
