@@ -191,9 +191,19 @@ export default function Movie() {
                             </span>
                           </div>
 
-                          <p className="card-text text-white-50 small mb-0">
+                          <p className="card-text text-white-50 small mb-2">
                             {review.text}
                           </p>
+
+                          <div className="text-end text-white-50 small">
+                            {new Date(
+                              review.created_at.replace(" ", "T")
+                            ).toLocaleDateString("it-IT", {
+                              day: "2-digit",
+                              month: "short",
+                              year: "numeric",
+                            })}
+                          </div>
                         </div>
                       </div>
                     </div>
