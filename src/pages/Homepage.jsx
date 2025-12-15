@@ -25,6 +25,14 @@ export default function Homepage() {
         </div>
       ) : (
         <div className="container mt-4">
+          <div className="text-center mb-5">
+            <h1 className="text-white display-4 fw-bold">MovieReview</h1>
+            <p className="text-secondary fs-5 mt-3">
+              Exploring films beyond the screen, one review at a time
+            </p>
+            <hr className="border-secondary mb-4" />
+          </div>
+
           {movies.length > 0 ? (
             <div className="row">
               {movies.map((movie) => (
