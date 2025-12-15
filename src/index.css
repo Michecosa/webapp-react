@@ -5,3 +5,8 @@
 body {
   overflow-x: hidden;
 }
+
+.dark-placeholder::placeholder {
+  color: #adb5bd;
+  opacity: 1;
+}
