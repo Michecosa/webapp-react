@@ -35,7 +35,7 @@ export default function Movie() {
 
         setFormData({
           name: "",
-          vote: "",
+          vote: 0,
           text: "",
         });
       })
@@ -109,35 +109,34 @@ export default function Movie() {
                 onSubmit={handleSubmit}
                 className="mb-3 p-3 rounded bg-dark border border-secondary"
               >
-                <div className="row g-2 mb-2">
-                  <div className="col-8">
-                    <input
-                      type="text"
-                      name="name"
-                      className="form-control form-control-sm bg-dark text-light border-secondary dark-placeholder"
-                      placeholder="Your name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
+                <div className="mb-2">
+                  <input
+                    type="text"
+                    name="name"
+                    className="form-control form-control-sm bg-dark text-light border-secondary dark-placeholder"
+                    placeholder="Your name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
 
-                  <div className="col-4">
-                    <select
-                      name="vote"
-                      className="form-select form-select-sm bg-dark text-light border-secondary dark-placeholder"
-                      value={formData.vote}
-                      onChange={handleChange}
-                      required
-                    >
-                      <option value="">Vote</option>
-                      {[1, 2, 3, 4, 5].map((v) => (
-                        <option key={v} value={v}>
-                          {v}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                <div className="mb-2 d-flex align-items-center gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <i
+                      key={star}
+                      className={`bi ${
+                        star <= formData.vote
+                          ? "bi-star-fill text-warning"
+                          : "bi-star text-secondary"
+                      } fs-5`}
+                      role="button"
+                      style={{ cursor: "pointer" }}
+                      onClick={() =>
+                        setFormData((prev) => ({ ...prev, vote: star }))
+                      }
+                    />
+                  ))}
                 </div>
 
                 <div className="mb-2">
