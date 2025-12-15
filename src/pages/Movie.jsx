@@ -77,7 +77,15 @@ export default function Movie() {
             </div>
 
             <div className="col-md-7 text-white">
-              <h2 className="fw-bold mb-1">{movie.title}</h2>
+              <div className="d-flex justify-content-between align-items-center mb-2">
+                <h2 className="fw-bold mb-0">{movie.title}</h2>
+                <button
+                  className="btn btn-outline-brand btn-sm"
+                  onClick={() => navigate(-1)}
+                >
+                  <i className="bi bi-arrow-return-left"></i>
+                </button>
+              </div>
 
               <p className="text-white-50 mb-1">
                 <strong>Genre:</strong> {movie.genre}
@@ -92,13 +100,6 @@ export default function Movie() {
               </p>
 
               <p className="mb-4">{movie.abstract}</p>
-
-              <button
-                className="btn btn-outline-primary mt-3"
-                onClick={() => navigate(-1)}
-              >
-                Go back
-              </button>
             </div>
           </div>
 

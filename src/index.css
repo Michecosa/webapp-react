@@ -10,3 +10,13 @@ body {
   color: #adb5bd;
   opacity: 1;
 }
+
+.btn-outline-brand {
+  color: #6351ce;
+  border-color: #6351ce;
+}
+
+.btn-outline-brand:hover {
+  background-color: #6351ce;
+  color: #fff;
+}
