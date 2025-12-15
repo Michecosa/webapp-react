@@ -9,6 +9,40 @@ export default function Movie() {
 
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [formData, setFormData] = useState({
+    name: "",
+    vote: "",
+    text: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post(`${urlMovies}/${id}/reviews`, formData)
+      .then((res) => {
+        setMovie({
+          ...movie,
+          reviews: [...movie.reviews, res.data],
+        });
+
+        setFormData({
+          name: "",
+          vote: "",
+          text: "",
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   useEffect(() => {
     axios
@@ -69,7 +103,52 @@ export default function Movie() {
 
           <div className="row mt-5">
             <div className="col-12 text-white">
-              <h4 className="mb-4">Reviews</h4>
+              <h4 className="mb-3">Reviews</h4>
+
+              <form onSubmit={handleSubmit} className="mb-4">
+                <div className="mb-2">
+                  <input
+                    type="text"
+                    name="name"
+                    className="form-control"
+                    placeholder="Your name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                <div className="mb-2">
+                  <select
+                    name="vote"
+                    className="form-select"
+                    value={formData.vote}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Vote</option>
+                    {[1, 2, 3, 4, 5].map((v) => (
+                      <option key={v} value={v}>
+                        {v}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="mb-2">
+                  <textarea
+                    name="text"
+                    className="form-control"
+                    rows="3"
+                    placeholder="Write your review"
+                    value={formData.text}
+                    onChange={handleChange}
+                    required
+                  ></textarea>
+                </div>
+
+                <button className="btn btn-warning">Submit review</button>
+              </form>
 
               {movie.reviews && movie.reviews.length > 0 ? (
                 <ul className="list-group list-group-flush">
