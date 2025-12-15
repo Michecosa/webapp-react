@@ -64,44 +64,43 @@ export default function Movie() {
         <div className="spinner-border text-primary" role="status"></div>
       ) : (
         <>
-          <div className="row g-5 align-items-start">
-            <div className="col-md-5 d-flex justify-content-center">
-              <div className="pe-lg-3">
-                <img
-                  src={movie.image_url}
-                  alt={movie.title}
-                  className="img-fluid rounded"
-                  style={{ objectFit: "cover" }}
-                />
+          <div
+            className="rounded p-5 mb-5"
+            style={{
+              backgroundImage: `
+      linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.4)),
+      url(${movie.image_url})
+    `,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center top",
+            }}
+          >
+            <div className="d-flex justify-content-between align-items-start">
+              <div className="text-white">
+                <h1 className="fw-bold mb-2">{movie.title}</h1>
+
+                <p className="text-white-50 mb-1">
+                  {movie.genre} &bull; {movie.release_year}
+                </p>
+
+                <p className="text-white-50 mb-3">
+                  Directed by <strong>{movie.director}</strong>
+                </p>
+
+                <p className="col-md-8">{movie.abstract}</p>
               </div>
-            </div>
 
-            <div className="col-md-7 text-white">
-              <div className="d-flex justify-content-between align-items-center mb-2">
-                <h2 className="fw-bold mb-0">{movie.title}</h2>
-                <button
-                  className="btn btn-outline-brand btn-sm"
-                  onClick={() => navigate(-1)}
-                >
-                  <i className="bi bi-arrow-return-left"></i>
-                </button>
-              </div>
-
-              <p className="text-white-50 mb-1">
-                <strong>Genre:</strong> {movie.genre}
-              </p>
-
-              <p className="text-white-50 mb-1">
-                <strong>Director:</strong> {movie.director}
-              </p>
-
-              <p className="text-white-50 mb-3">
-                <strong>Year:</strong> {movie.release_year}
-              </p>
-
-              <p className="mb-4">{movie.abstract}</p>
+              <button
+                className="btn btn-outline-light btn-sm"
+                onClick={() => navigate(-1)}
+              >
+                <i className="bi bi-arrow-left"></i>
+              </button>
             </div>
           </div>
+
+          <hr className="border-secondary my-5" />
 
           <div className="row mt-5">
             <div className="col-12 text-white">
