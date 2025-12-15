@@ -14,6 +14,7 @@ export default function Movie() {
     vote: "",
     text: "",
   });
+  const [showAddReview, setShowAddReview] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -103,60 +104,78 @@ export default function Movie() {
 
           <div className="row mt-5">
             <div className="col-12 text-white">
-              <h4 className="mb-3">Reviews</h4>
+              <div className="d-flex justify-content-between align-items-center mb-3">
+                <h4 className="mb-0">Reviews</h4>
 
-              <form
-                onSubmit={handleSubmit}
-                className="mb-3 p-3 rounded bg-dark border border-secondary"
-              >
-                <div className="mb-2">
-                  <input
-                    type="text"
-                    name="name"
-                    className="form-control form-control-sm bg-dark text-light border-secondary dark-placeholder"
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
+                <button
+                  className="btn btn-sm btn-outline-warning"
+                  onClick={() => setShowAddReview(true)}
+                >
+                  Add review
+                </button>
+              </div>
 
-                <div className="mb-2 d-flex align-items-center gap-1">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <i
-                      key={star}
-                      className={`bi ${
-                        star <= formData.vote
-                          ? "bi-star-fill text-warning"
-                          : "bi-star text-secondary"
-                      } fs-5`}
-                      role="button"
-                      style={{ cursor: "pointer" }}
-                      onClick={() =>
-                        setFormData((prev) => ({ ...prev, vote: star }))
-                      }
+              {showAddReview && (
+                <form
+                  onSubmit={handleSubmit}
+                  className="mb-3 p-3 rounded bg-dark border border-secondary"
+                >
+                  <div className="mb-2">
+                    <input
+                      type="text"
+                      name="name"
+                      className="form-control form-control-sm bg-dark text-light border-secondary dark-placeholder"
+                      placeholder="Your name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
                     />
-                  ))}
-                </div>
+                  </div>
 
-                <div className="mb-2">
-                  <textarea
-                    name="text"
-                    className="form-control form-control-sm bg-dark text-light border-secondary dark-placeholder"
-                    rows="2"
-                    placeholder="Write your review"
-                    value={formData.text}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
+                  <div className="mb-2 d-flex align-items-center gap-1 ms-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <i
+                        key={star}
+                        className={`bi ${
+                          star <= formData.vote
+                            ? "bi-star-fill text-warning"
+                            : "bi-star text-secondary"
+                        } fs-5`}
+                        role="button"
+                        onClick={() =>
+                          setFormData((prev) => ({ ...prev, vote: star }))
+                        }
+                      />
+                    ))}
+                  </div>
 
-                <div className="text-end">
-                  <button className="btn btn-sm btn-warning px-3">
-                    Submit
-                  </button>
-                </div>
-              </form>
+                  <div className="mb-2">
+                    <textarea
+                      name="text"
+                      className="form-control form-control-sm bg-dark text-light border-secondary dark-placeholder"
+                      rows="2"
+                      placeholder="Write your review"
+                      value={formData.text}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <div className="d-flex justify-content-end gap-2">
+                    <button
+                      type="button"
+                      className="btn btn-sm btn-outline-secondary"
+                      onClick={() => setShowAddReview(false)}
+                    >
+                      Cancel
+                    </button>
+
+                    <button className="btn btn-sm btn-warning px-3">
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              )}
 
               {movie.reviews && movie.reviews.length > 0 ? (
                 <ul className="list-group list-group-flush">
