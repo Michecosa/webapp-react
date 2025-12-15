@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Card({ movie }) {
   return (
-    <div className="col-md-3 mb-4">
+    <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
       <div className="card shadow-sm bg-dark h-100">
         {movie.image_url ? (
           <img
