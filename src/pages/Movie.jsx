@@ -178,19 +178,27 @@ export default function Movie() {
               )}
 
               {movie.reviews && movie.reviews.length > 0 ? (
-                <ul className="list-group list-group-flush">
+                <div className="row g-3">
                   {movie.reviews.map((review) => (
-                    <li
-                      key={review.id}
-                      className="list-group-item bg-dark text-white"
-                    >
-                      <strong className="me-1">{review.name}</strong> &ndash;{" "}
-                      <i className="bi bi-star-fill text-warning me-1"></i>
-                      <strong>{review.vote}/5</strong>
-                      <p className="mb-1 text-white-50">{review.text}</p>
-                    </li>
+                    <div key={review.id} className="col-12 col-md-6">
+                      <div className="card bg-dark text-white h-100 shadow-sm">
+                        <div className="card-body p-3">
+                          <div className="d-flex justify-content-between align-items-center mb-2">
+                            <strong>{review.name}</strong>
+                            <span>
+                              <i className="bi bi-star-fill text-warning me-1"></i>
+                              <strong>{review.vote}/5</strong>
+                            </span>
+                          </div>
+
+                          <p className="card-text text-white-50 small mb-0">
+                            {review.text}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   ))}
-                </ul>
+                </div>
               ) : (
                 <p className="text-white-50">No reviews available.</p>
               )}
