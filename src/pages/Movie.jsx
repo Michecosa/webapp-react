@@ -121,40 +121,51 @@ export default function Movie() {
                   className="mb-3 p-3 rounded bg-dark border border-secondary"
                 >
                   <div className="mb-2">
+                    <label className="form-label text-white small mb-1">
+                      Your name
+                    </label>
                     <input
                       type="text"
                       name="name"
                       className="form-control form-control-sm bg-dark text-light border-secondary dark-placeholder"
-                      placeholder="Your name"
+                      placeholder="How should we call you?"
                       value={formData.name}
                       onChange={handleChange}
                       required
                     />
                   </div>
 
-                  <div className="mb-2 d-flex align-items-center gap-1 ms-1">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <i
-                        key={star}
-                        className={`bi ${
-                          star <= formData.vote
-                            ? "bi-star-fill text-warning"
-                            : "bi-star text-secondary"
-                        } fs-5`}
-                        role="button"
-                        onClick={() =>
-                          setFormData((prev) => ({ ...prev, vote: star }))
-                        }
-                      />
-                    ))}
+                  <div className="mb-2">
+                    <label className="form-label text-white small mb-1">
+                      Your rating
+                    </label>
+                    <div className="d-flex align-items-center gap-1 ms-1">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <i
+                          key={star}
+                          className={`bi ${
+                            star <= formData.vote
+                              ? "bi-star-fill text-warning"
+                              : "bi-star text-secondary"
+                          } fs-5`}
+                          role="button"
+                          onClick={() =>
+                            setFormData((prev) => ({ ...prev, vote: star }))
+                          }
+                        />
+                      ))}
+                    </div>
                   </div>
 
                   <div className="mb-2">
+                    <label className="form-label text-white small mb-1">
+                      Your review
+                    </label>
                     <textarea
                       name="text"
                       className="form-control form-control-sm bg-dark text-light border-secondary dark-placeholder"
                       rows="2"
-                      placeholder="Write your review"
+                      placeholder="Was it worth watching? Why?"
                       value={formData.text}
                       onChange={handleChange}
                       required
@@ -178,36 +189,37 @@ export default function Movie() {
               )}
 
               {movie.reviews && movie.reviews.length > 0 ? (
-                <div className="row g-3">
-                  {movie.reviews.map((review) => (
-                    <div key={review.id} className="col-12 col-md-6">
-                      <div className="card bg-dark text-white h-100 shadow-sm">
-                        <div className="card-body p-3">
-                          <div className="d-flex justify-content-between align-items-center mb-2">
-                            <strong>{review.name}</strong>
-                            <span>
-                              <i className="bi bi-star-fill text-warning me-1"></i>
-                              <strong>{review.vote}/5</strong>
-                            </span>
-                          </div>
-
-                          <p className="card-text text-white-50 small mb-2">
-                            {review.text}
-                          </p>
-
-                          <div className="text-end text-white-50 small">
-                            {new Date(
-                              review.created_at.replace(" ", "T")
-                            ).toLocaleDateString("it-IT", {
-                              day: "2-digit",
-                              month: "short",
-                              year: "numeric",
-                            })}
-                          </div>
+                <div className="row g-3 mt-4">
+                  <ul className="list-unstyled text-white">
+                    {movie.reviews.map((review, index) => (
+                      <li key={review.id} className="pb-3">
+                        <div className="d-flex justify-content-between align-items-center mb-1">
+                          <strong>{review.name}</strong>
+                          <span>
+                            <i className="bi bi-star-fill text-warning me-1"></i>
+                            <strong>{review.vote}/5</strong>
+                          </span>
                         </div>
-                      </div>
-                    </div>
-                  ))}
+
+                        <p className="text-white-50 small mb-1">
+                          {review.text}
+                        </p>
+
+                        <div className="text-end text-white-50 small">
+                          {new Date(
+                            review.created_at.replace(" ", "T")
+                          ).toLocaleDateString("it-IT", {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                          })}
+                        </div>
+                        {index < movie.reviews.length - 1 && (
+                          <hr className="border-secondary mt-3" />
+                        )}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ) : (
                 <p className="text-white-50">No reviews available.</p>
