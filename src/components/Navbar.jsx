@@ -3,7 +3,10 @@ import logo from "../assets/logo.svg";
 
 export default function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav
+      className="navbar navbar-expand-lg navbar-dark"
+      style={{ backgroundColor: "#6351ce" }}
+    >
       <div className="container">
         <NavLink className="navbar-brand d-flex align-items-center" to="/">
           <img src={logo} alt="Logo" width="24" height="auto" />
