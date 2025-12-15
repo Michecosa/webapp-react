@@ -63,6 +63,25 @@ export default function Movie() {
             >
               Go back
             </button>
+            <h4 className="mt-4 text-white">Reviews</h4>
+
+            {movie.reviews && movie.reviews.length > 0 ? (
+              <ul className="list-group list-group-flush">
+                {movie.reviews.map((review) => (
+                  <li
+                    key={review.id}
+                    className="list-group-item bg-dark text-white"
+                  >
+                    <strong className="me-1">{review.name}</strong> &ndash;{" "}
+                    <i className="bi bi-star-fill text-warning me-1"></i>
+                    <strong>{review.vote}/5</strong>
+                    <p className="mb-1 text-white-50">{review.text}</p>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-white-50">No reviews available.</p>
+            )}
           </div>
         </div>
       )}
