@@ -11,7 +11,7 @@ export default function Movie() {
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
-    vote: "",
+    vote: 0,
     text: "",
   });
   const [showAddReview, setShowAddReview] = useState(false);
@@ -31,14 +31,20 @@ export default function Movie() {
       .then((res) => {
         setMovie({
           ...movie,
-          reviews: [...movie.reviews, res.data],
+          reviews: [
+            ...movie.reviews,
+            {
+              ...res.data,
+              created_at: new Date().toISOString(),
+            },
+          ],
         });
-
         setFormData({
           name: "",
           vote: 0,
           text: "",
         });
+        setShowAddReview(false);
       })
       .catch((err) => {
         console.error(err);
