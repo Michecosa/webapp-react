@@ -9,11 +9,6 @@ export function LoadingProvider({ children }) {
 
   return (
     <LoadingContext.Provider value={{ loading, setLoading }}>
-      {loading && (
-        <div className="container text-center mt-5">
-          <Mirage size="75" speed="3" color="white" />
-        </div>
-      )}
       {children}
     </LoadingContext.Provider>
   );

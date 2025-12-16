@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import Card from "../components/Card";
 import { urlMovies } from "../data/api";
 import { useLoading } from "../context/LoadingContext";
+import { Mirage } from "ldrs/react";
+import "ldrs/react/Mirage.css";
 
 export default function Homepage() {
   const [movies, setMovies] = useState([]);
-  const { setLoading } = useLoading();
+  const { loading, setLoading } = useLoading();
 
   useEffect(() => {
     setLoading(true);
@@ -29,20 +31,25 @@ export default function Homepage() {
         </p>
         <hr className="border-secondary mb-4" />
       </div>
-
-      <div className="container mt-4">
-        {movies.length > 0 ? (
-          <div className="row">
-            {movies.map((movie) => (
-              <Card key={movie.id} movie={movie} />
-            ))}
-          </div>
-        ) : (
-          <p className="text-center mt-4 text-white">
-            Oggi niente film, va a leggere un libro
-          </p>
-        )}
-      </div>
+      {loading ? (
+        <div className="container text-center mt-5">
+          <Mirage size="75" speed="3" color="white" />;
+        </div>
+      ) : (
+        <div className="container mt-4">
+          {movies.length > 0 ? (
+            <div className="row">
+              {movies.map((movie) => (
+                <Card key={movie.id} movie={movie} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-center mt-4 text-white">
+              Oggi niente film, va a leggere un libro
+            </p>
+          )}
+        </div>
+      )}
     </>
   );
 }
