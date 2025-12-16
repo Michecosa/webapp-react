@@ -8,12 +8,12 @@ export default function Card({ movie }) {
           <img
             src={movie.image_url}
             alt={movie.title}
-            style={{ width: "100%", height: "350px", objectFit: "cover" }}
+            style={{ width: "100%", height: "480px", objectFit: "cover" }}
           />
         ) : (
           <div
             className="d-flex align-items-center justify-content-center bg-secondary text-white"
-            style={{ height: "300px" }}
+            style={{ height: "400px" }}
           >
             No image
           </div>
