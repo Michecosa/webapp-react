@@ -2,13 +2,14 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { urlMovies } from "../data/api";
+import { useLoading } from "../context/LoadingContext";
 
 export default function Movie() {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [movie, setMovie] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { loading, setLoading, LoadingIcon } = useLoading();
   const [formData, setFormData] = useState({
     name: "",
     vote: 0,
@@ -52,6 +53,8 @@ export default function Movie() {
   };
 
   useEffect(() => {
+    setLoading(true);
+
     axios
       .get(`${urlMovies}/${id}`)
       .then((res) => {
@@ -67,7 +70,7 @@ export default function Movie() {
   return (
     <div className="container my-4">
       {loading ? (
-        <div className="spinner-border text-primary" role="status"></div>
+        <LoadingIcon />
       ) : (
         <>
           <div
@@ -75,7 +78,7 @@ export default function Movie() {
             style={{
               backgroundImage: `
       linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.4)),
-      url(${movie.image_url})
+      url(${movie?.image_url})
     `,
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
@@ -84,17 +87,17 @@ export default function Movie() {
           >
             <div className="d-flex justify-content-between align-items-start">
               <div className="text-white">
-                <h1 className="fw-bold mb-2">{movie.title}</h1>
+                <h1 className="fw-bold mb-2">{movie?.title}</h1>
 
                 <p className="text-white-50 mb-1">
-                  {movie.genre} &bull; {movie.release_year}
+                  {movie?.genre} &bull; {movie?.release_year}
                 </p>
 
                 <p className="text-white-50 mb-3">
-                  Directed by <strong>{movie.director}</strong>
+                  Directed by <strong>{movie?.director}</strong>
                 </p>
 
-                <p className="col-md-8">{movie.abstract}</p>
+                <p className="col-md-8">{movie?.abstract}</p>
               </div>
 
               <button
@@ -194,33 +197,33 @@ export default function Movie() {
                 </form>
               )}
 
-              {movie.reviews && movie.reviews.length > 0 ? (
+              {movie?.reviews && movie?.reviews.length > 0 ? (
                 <div className="row g-3 mt-4">
                   <ul className="list-unstyled text-white">
-                    {movie.reviews.map((review, index) => (
-                      <li key={review.id} className="pb-3">
+                    {movie?.reviews.map((review, index) => (
+                      <li key={review?.id} className="pb-3">
                         <div className="d-flex justify-content-between align-items-center mb-1">
-                          <strong>{review.name}</strong>
+                          <strong>{review?.name}</strong>
                           <span>
                             <i className="bi bi-star-fill text-warning me-1"></i>
-                            <strong>{review.vote}/5</strong>
+                            <strong>{review?.vote}/5</strong>
                           </span>
                         </div>
 
                         <p className="text-white-50 small mb-1">
-                          {review.text}
+                          {review?.text}
                         </p>
 
                         <div className="text-end text-white-50 small">
                           {new Date(
-                            review.created_at.replace(" ", "T")
+                            review?.created_at.replace(" ", "T")
                           ).toLocaleDateString("it-IT", {
                             day: "2-digit",
                             month: "short",
                             year: "numeric",
                           })}
                         </div>
-                        {index < movie.reviews.length - 1 && (
+                        {index < movie?.reviews.length - 1 && (
                           <hr className="border-secondary mt-3" />
                         )}
                       </li>
