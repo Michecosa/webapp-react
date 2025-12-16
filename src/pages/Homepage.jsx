@@ -3,12 +3,10 @@ import { useState, useEffect } from "react";
 import Card from "../components/Card";
 import { urlMovies } from "../data/api";
 import { useLoading } from "../context/LoadingContext";
-import { Mirage } from "ldrs/react";
-import "ldrs/react/Mirage.css";
 
 export default function Homepage() {
   const [movies, setMovies] = useState([]);
-  const { loading, setLoading } = useLoading();
+  const { loading, setLoading, LoadingIcon } = useLoading();
 
   useEffect(() => {
     setLoading(true);
@@ -32,9 +30,7 @@ export default function Homepage() {
         <hr className="border-secondary mb-4" />
       </div>
       {loading ? (
-        <div className="container text-center mt-5">
-          <Mirage size="75" speed="3" color="white" />;
-        </div>
+        <LoadingIcon />
       ) : (
         <div className="container mt-4">
           {movies.length > 0 ? (
